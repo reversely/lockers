@@ -1,0 +1,13 @@
+{
+  "issue": 5,
+  "agent": "lockers",
+  "files": [
+    ".env.local.example",
+    "bun.lock",
+    "package.json",
+    "supabase/.gitignore",
+    "supabase/config.toml"
+  ],
+  "opened": "2026-07-31T16:19:44.450Z",
+  "closed": "2026-07-31T16:19:44.456Z"
+}
