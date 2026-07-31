@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks a push that touches a file which also changed on origin/main since this branch
+# left it. Install with .claude/coordination/install-hooks.sh.
+exec node "$(git rev-parse --show-toplevel)/.claude/coordination/coord.mjs" check

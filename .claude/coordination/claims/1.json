@@ -1,0 +1,16 @@
+{
+  "issue": 1,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/README.md",
+    ".claude/coordination/claims/.gitkeep",
+    ".claude/coordination/coord.mjs",
+    ".claude/coordination/hooks/pre-push",
+    ".claude/coordination/install-hooks.sh",
+    ".gitignore",
+    "CLAUDE.md",
+    "docs/plans/locker-management-system.md"
+  ],
+  "opened": "2026-07-31T15:34:02.154Z",
+  "closed": "2026-07-31T15:34:02.159Z"
+}
