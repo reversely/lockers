@@ -91,8 +91,31 @@ turned out to be false, what was measured, what was rejected and why. Nothing th
 
 ## Style
 
-No em dashes. Split the sentence, or use a colon. The `house-style` skill holds the full prose ruleset
-for docs, PRDs, commits, and any human-facing text; invoke it when writing or reviewing.
 
-Prefer typed database fields rendered as tables, dropdowns, or pills over delimited plaintext in a
-single cell.
+### House-style checklist
+
+Run this over every message, doc, comment, and commit before sending.  Read line by line and apply each
+item. A keyword grep finds banned words but misses the structural faults (fragments, copulas, comma-tails),
+so read the sentences, do not grep them. The full rules and word lists live in the `house-style` skill.
+
+- [ ] No em dash, en dash, or double-hyphen clause separator. 
+- [ ] BE CONCISE. DON'T OVER JUSTIFY OR GO AROUND IN CIRCLES. MAKE A POINT, NO EXCUSES, NO METAPHORS, NO STYLIZATION.
+- [ ]  No noun-phrase fragments!
+- [ ] Banned words: Carries (prefer "has"), holds (prefer "uses"), "honest"/"honestly" (just don't put this qualifier in!!!!!!!!), "gated", "load-bearing". I dislike "blocked"; avoid it in favour of "pending".
+- [ ] Every sentence has a finite verb and a named actor. No metaphors unless they are intentionally requested by the developer, discussed for cohesion and approved.
+- [ ] No copula ("is/are/was/were") standing in for a mechanism, and no chained "X is Y, and it is Z".
+- [ ] No comma-tail: a full clause, a comma, then a short trailing modifier. Fold it into the clause.
+- [ ] No antithesis ("not X, but Y"; "X, not Y"), no isocolon, no tricolon.
+- [ ] No aphorism or verb for a mechanism ("catches", "stays a draft", "absorbs"). State the mechanism.
+- [ ] No personified system, and no causal chain compressed into a metaphor. Name the agent, choice, and consequence.
+- [ ] No inflated or filler word: genuinely, honestly, quietly, deeply, leverage, unlock, optimize, streamline,
+      seamless, flag, call out, adjudicator, "the whole X", "at the end of the day".
+- [ ] No passive that hides who acted, no vague universal noun (thing, way, process, space) carrying the sentence.
+- [ ] Every abstract sentence is followed by a concrete number, example, or consequence.
+- [ ] A proposal reads as a proposal, not as current behavior.
+- [ ] Concision: say it once. No restating a result in a second sentence, no summary
+      paragraph that repeats the table above it, no preamble before the number.
+- [ ] No dramatization: a negative result is a measurement, not a reversal or a lesson.
+      State what was measured and what it implies. Cut "critically", "decisively",
+      "strikingly", "the good news", "what this means is", and any sentence whose
+      only job is to tell the reader how important the previous sentence was.
