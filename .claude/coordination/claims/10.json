@@ -1,0 +1,11 @@
+{
+  "issue": 10,
+  "agent": "lockers",
+  "files": [
+    "CLAUDE.md",
+    "scripts/verify-db.mjs",
+    "supabase/migrations/20260731123000_grants_service_role.sql"
+  ],
+  "opened": "2026-07-31T16:43:45.985Z",
+  "closed": "2026-07-31T16:43:45.991Z"
+}
