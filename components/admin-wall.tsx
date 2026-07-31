@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import {
   fetchAdminWall,
+  insertInactiveLockers,
   searchPeople,
   type AdminLease,
   type AdminReservation,
@@ -31,6 +32,7 @@ export function AdminWall({
   const [now, setNow] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   const refetch = useCallback(async () => {
     setData(await fetchAdminWall(supabase));
@@ -79,13 +81,56 @@ export function AdminWall({
     (l) => l.is_active && !leaseByLocker.has(l.id) && !reservationByLocker.has(l.id),
   );
   const maxCol = Math.max(1, ...data.lockers.map((l) => l.col));
+  const maxRow = Math.max(1, ...data.lockers.map((l) => l.row));
+
+  // A new row inserts one inactive locker per existing column; a new column one per existing
+  // row. An empty wall starts from a single cell.
+  const growRow = () =>
+    act(async () => {
+      const row = data.lockers.length === 0 ? 1 : maxRow + 1;
+      const cols = data.lockers.length === 0 ? [1] : Array.from({ length: maxCol }, (_, i) => i + 1);
+      return await insertInactiveLockers(supabase, cols.map((col) => ({ row, col })));
+    });
+  const growCol = () =>
+    act(async () => {
+      const col = data.lockers.length === 0 ? 1 : maxCol + 1;
+      const rows = data.lockers.length === 0 ? [1] : Array.from({ length: maxRow }, (_, i) => i + 1);
+      return await insertInactiveLockers(supabase, rows.map((row) => ({ row, col })));
+    });
+  const rename = (lockerId: string, label: string) =>
+    act(async () => await supabase.from("lockers").update({ label }).eq("id", lockerId));
 
   return (
     <section className="surface" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <h2 className="surface-title">The wall</h2>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <h2 className="surface-title">The wall</h2>
+        <button className={editing ? "btn btn-ink" : "btn btn-line"} onClick={() => setEditing((e) => !e)}>
+          {editing ? "Done" : "Edit layout"}
+        </button>
+      </div>
+      {editing ? (
+        <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 14 }}>
+          <span>
+            {maxRow} row{maxRow === 1 ? "" : "s"}
+          </span>
+          <button className="btn btn-line" disabled={busy} onClick={growRow}>
+            Add row
+          </button>
+          <span>
+            {maxCol} column{maxCol === 1 ? "" : "s"}
+          </span>
+          <button className="btn btn-line" disabled={busy} onClick={growCol}>
+            Add column
+          </button>
+          <span className="notice-line">Click a cell to rename it. New cells start inactive.</span>
+        </div>
+      ) : null}
       {error ? <p className="error-line">{error}</p> : null}
       {data.lockers.length === 0 ? (
-        <p style={{ fontSize: 14 }}>No lockers exist yet. The layout editor creates them.</p>
+        <p style={{ fontSize: 14 }}>
+          No lockers exist yet.{" "}
+          {editing ? "Add a row to create the first cell." : "Edit layout creates them."}
+        </p>
       ) : (
         <div className="wall-scroll">
           <div className="wall-grid" style={{ gridTemplateColumns: `repeat(${maxCol}, minmax(64px, 96px))` }}>
@@ -99,6 +144,24 @@ export function AdminWall({
                   : reservation
                     ? "reserved"
                     : "available";
+              if (editing) {
+                return (
+                  <div key={locker.id} className={`cell cell-${state}`} style={{ gridColumn: locker.col, gridRow: locker.row }}>
+                    <input
+                      className="cell-rename"
+                      defaultValue={locker.label}
+                      aria-label={`Rename ${locker.label}`}
+                      onBlur={(e) => {
+                        const next = e.target.value.trim();
+                        if (next && next !== locker.label) void rename(locker.id, next);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+                      }}
+                    />
+                  </div>
+                );
+              }
               return (
                 <button
                   key={locker.id}
@@ -116,7 +179,7 @@ export function AdminWall({
         </div>
       )}
 
-      {open ? (
+      {open && !editing ? (
         <SidePanel
           key={open.id + (openLease?.id ?? "") + (openReservation?.id ?? "")}
           locker={open}

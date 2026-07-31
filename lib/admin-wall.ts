@@ -71,6 +71,29 @@ export async function fetchAdminWall(supabase: SupabaseClient): Promise<AdminWal
   return { lockers, leases, reservations, people };
 }
 
+// Inserts inactive lockers at the given positions. A generated label can collide with a
+// hand-written one and lockers.label is unique, so a collision retries with a numeric suffix.
+export async function insertInactiveLockers(
+  supabase: SupabaseClient,
+  positions: { row: number; col: number }[],
+): Promise<{ error: { message: string } | null }> {
+  for (const { row, col } of positions) {
+    const base = `R${row}C${col}`;
+    let attempt = 0;
+    for (;;) {
+      const label = attempt === 0 ? base : `${base}-${attempt}`;
+      const { error } = await supabase.from("lockers").insert({ label, row, col, is_active: false });
+      if (!error) break;
+      if (error.code === "23505" && error.message.includes("label") && attempt < 5) {
+        attempt += 1;
+        continue;
+      }
+      return { error };
+    }
+  }
+  return { error: null };
+}
+
 export async function searchPeople(supabase: SupabaseClient, term: string): Promise<Person[]> {
   const like = `%${term}%`;
   const { data } = await supabase

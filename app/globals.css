@@ -307,6 +307,19 @@ textarea.input {
   background: var(--paper);
   color: var(--ink-3);
 }
+.cell-rename {
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid var(--signature);
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+}
+.cell-rename:focus {
+  outline: none;
+}
+
 .cell-name {
   font-size: 11px;
   font-weight: 400;
