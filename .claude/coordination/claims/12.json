@@ -1,0 +1,29 @@
+{
+  "issue": 12,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/12.json",
+    "app/auth/actions.ts",
+    "app/auth/callback/route.ts",
+    "app/auth/confirm/route.ts",
+    "app/globals.css",
+    "app/login/page.tsx",
+    "app/page.tsx",
+    "app/profile/actions.ts",
+    "app/profile/page.tsx",
+    "app/signup/page.tsx",
+    "components/dashboard.tsx",
+    "components/status-panel.tsx",
+    "components/top-bar.tsx",
+    "components/wall.tsx",
+    "lib/supabase/client.ts",
+    "lib/supabase/proxy.ts",
+    "lib/supabase/server.ts",
+    "lib/wall.ts",
+    "proxy.ts",
+    "scripts/verify-db.mjs",
+    "supabase/config.toml"
+  ],
+  "opened": "2026-07-31T16:54:18.887Z",
+  "closed": "2026-07-31T17:11:39.427Z"
+}

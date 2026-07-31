@@ -107,7 +107,6 @@ try {
   results.push(check("the other user sees state=reserved on the wall", wallSeen[0]?.state === "reserved", JSON.stringify(wallSeen[0] ?? {}).slice(0, 90)));
 
   // The wall must not expose an ID number or any comment column (#6).
-  const wallCols = Object.keys(wallSeen[0] ?? {});
   const wallAll = await j(await fetch(`${URL_}/rest/v1/locker_wall?select=*&limit=1`, { headers: usr(loserToken) }));
   const leaked = Object.keys(wallAll[0] ?? {}).filter((c) => /id_number|comment/.test(c));
   results.push(check("the wall exposes no ID number and no comment column", leaked.length === 0, leaked.join(",") || "none"));
@@ -144,7 +143,7 @@ try {
     method: "POST", headers: usr(winnerToken),
     body: JSON.stringify({ locker_id: L2.id, user_id: idA, end_date: "2027-01-01" }),
   });
-  const directLocker = await fetch(`${URL_}/rest/v1/lockers?id=eq.${L2.id}`, { method: "PATCH", headers: usr(winnerToken), body: JSON.stringify({ label: "HACKED" }) });
+  await fetch(`${URL_}/rest/v1/lockers?id=eq.${L2.id}`, { method: "PATCH", headers: usr(winnerToken), body: JSON.stringify({ label: "HACKED" }) });
   const lockerNow = await j(await fetch(`${URL_}/rest/v1/lockers?select=label&id=eq.${L2.id}`, { headers: svc() }));
   results.push(check("a user's direct insert into leases is refused", directLease.status >= 400, `status ${directLease.status}`));
   results.push(check("a user's direct update on lockers changes nothing", lockerNow[0]?.label === "TEST-2", `label ${lockerNow[0]?.label}`));

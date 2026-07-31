@@ -106,3 +106,250 @@
     @apply font-sans;
   }
 }
+
+/* Application chrome, metrics from the app-screens reference: 56px top bar on --card, white
+   surfaces at 12px radius and 24px padding, 36px controls at 8px radius, focus ring in the
+   signature colour. */
+
+.topbar {
+  height: 56px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.wordmark {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.app-main {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.surface {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+}
+.surface-title {
+  font-size: var(--text-surface-title);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+.input {
+  height: 36px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  background: var(--card);
+  color: var(--ink);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--signature);
+  box-shadow: 0 0 0 3px var(--signature-soft);
+}
+textarea.input {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 12px;
+}
+
+.btn {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--signature);
+  outline-offset: 1px;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-ink {
+  background: var(--ink);
+  color: var(--card);
+}
+.btn-ink:hover:not(:disabled) {
+  background: #16222b;
+}
+.btn-line {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+.btn-line:hover:not(:disabled) {
+  border-color: var(--ink-3);
+}
+
+.error-line {
+  font-size: 13px;
+  color: var(--tag-red-text);
+}
+.notice-line {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.auth-main {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The wall. Cell states from plan step 32: available white with a hairline, reserved
+   signature-soft with a signature outline on the viewer's own, occupied steel with ink text,
+   inactive paper with no border. */
+
+.wall-scroll {
+  overflow-x: auto;
+}
+.wall-grid {
+  display: grid;
+  gap: 8px;
+  padding-block: 4px;
+}
+.cell {
+  position: relative;
+  min-width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 1px solid transparent;
+}
+.cell:focus-visible {
+  outline: 2px solid var(--signature);
+  outline-offset: 1px;
+}
+.cell-available {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.cell-claimable:hover {
+  border-color: var(--signature);
+  cursor: pointer;
+}
+.cell-reserved {
+  background: var(--signature-soft);
+  color: var(--ink-2);
+}
+.cell-own {
+  background: var(--signature-soft);
+  border-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--signature);
+  color: var(--ink);
+}
+.cell-occupied {
+  background: var(--steel-1);
+  color: var(--ink);
+  cursor: pointer;
+}
+.cell-inactive {
+  background: var(--paper);
+  color: var(--ink-3);
+}
+.cell-name {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-2);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline: 4px;
+}
+.cell-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--signature);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgb(28 43 54 / 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  padding: 24px;
+}
+.popup {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card-hover);
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
