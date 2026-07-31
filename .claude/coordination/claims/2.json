@@ -1,0 +1,24 @@
+{
+  "issue": 2,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/2.json",
+    ".env.local.example",
+    "app/globals.css",
+    "app/layout.tsx",
+    "app/page.tsx",
+    "app/tokens.css",
+    "bun.lock",
+    "components.json",
+    "docs/plans/locker-management-system.md",
+    "eslint.config.mjs",
+    "lib/utils.ts",
+    "next.config.ts",
+    "package.json",
+    "postcss.config.mjs",
+    "scripts/fonts.mjs",
+    "tsconfig.json"
+  ],
+  "opened": "2026-07-31T15:36:49.442Z",
+  "closed": "2026-07-31T15:54:09.535Z"
+}

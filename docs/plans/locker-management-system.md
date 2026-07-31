@@ -19,7 +19,7 @@ Unique partial indexes and one SECURITY DEFINER RPC per action enforce the reser
 1. Run `bun create next-app` with TypeScript, App Router, and Tailwind.
 2. Create a Supabase project and store the URL, anon key, and service key in `.env.local`.
 3. Run `bun add @supabase/supabase-js @supabase/ssr resend`, then `bunx shadcn@latest init` for the behavioral layer (dialogs, dropdowns, data tables). Map its theme variables onto the tokens: `--paper` to background, `--ink` to foreground, `--signature` to primary.
-4. Copy `tokens.css` from the light-enterprise-ui skill into `app/` and import it in the root layout. Declare `@font-face` for Aeonik Light, Regular, and Medium from `public/fonts/`. That directory stays gitignored because the repo is public: a prebuild script writes the three files from the `AEONIK_FONTS_B64` environment variable, and the build fails when the variable is missing. Converting the `.ttf` weights to woff2 needs fonttools, which is not installed.
+4. Copy `tokens.css` from the light-enterprise-ui skill into `app/` and import it in the root layout. Declare `@font-face` for Aeonik Light, Regular, Medium, and Bold from `public/fonts/`. That directory stays gitignored because the repo is public: `scripts/fonts.mjs` runs on `prebuild` and fills it from `AEONIK_FONTS_URL`, `AEONIK_FONTS_B64`, or a local Aeonik install, and exits 1 in CI when none resolves. The four weights come to 328KB base64, above Vercel's 64KB ceiling on all environment variables combined, so a deployment reads the URL source. Converting the `.ttf` weights to woff2 needs fonttools, which is not installed.
 5. Enable email/password auth with email confirmation in Supabase.
 
 ## Phase 1: schema (one migration per step)
