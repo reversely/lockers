@@ -1,0 +1,15 @@
+{
+  "issue": 14,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/13.json",
+    "app/admin/layout.tsx",
+    "app/admin/requests/actions.ts",
+    "app/admin/requests/page.tsx",
+    "app/globals.css",
+    "lib/resend.ts",
+    "supabase/migrations/20260731140000_fix_role_guard.sql"
+  ],
+  "opened": "2026-07-31T17:17:00.948Z",
+  "closed": "2026-07-31T17:17:00.954Z"
+}
