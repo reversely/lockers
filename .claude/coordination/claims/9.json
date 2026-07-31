@@ -1,0 +1,11 @@
+{
+  "issue": 9,
+  "agent": "lockers",
+  "files": [
+    ".env.example",
+    ".gitignore",
+    "docs/plans/locker-management-system.md"
+  ],
+  "opened": "2026-07-31T16:30:02.246Z",
+  "closed": "2026-07-31T16:30:02.255Z"
+}

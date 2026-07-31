@@ -12,9 +12,10 @@ next-env.d.ts
 /build
 /dist
 
-# environment: Supabase URL, anon key, and service key live here
-.env
-.env*.local
+# environment: the Supabase URL and keys live here. Everything but the example is ignored,
+# so a stray .env.backup or .env.production cannot be committed by accident.
+.env*
+!.env.example
 
 # vercel
 .vercel
