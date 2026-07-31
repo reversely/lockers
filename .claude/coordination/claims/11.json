@@ -1,0 +1,10 @@
+{
+  "issue": 11,
+  "agent": "lockers",
+  "files": [
+    "scripts/verify-realtime.mjs",
+    "supabase/migrations/20260731130000_realtime_publication.sql"
+  ],
+  "opened": "2026-07-31T16:54:10.930Z",
+  "closed": "2026-07-31T16:54:10.937Z"
+}
