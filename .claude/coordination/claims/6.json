@@ -1,0 +1,16 @@
+{
+  "issue": 6,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/5.json",
+    ".env.local.example",
+    "bun.lock",
+    "docs/plans/locker-management-system.md",
+    "package.json",
+    "supabase/.gitignore",
+    "supabase/config.toml",
+    "supabase/migrations/20260731120600_locker_wall.sql"
+  ],
+  "opened": "2026-07-31T16:21:19.691Z",
+  "closed": "2026-07-31T16:21:19.698Z"
+}

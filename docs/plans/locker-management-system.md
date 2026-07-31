@@ -31,7 +31,7 @@ Unique partial indexes and one SECURITY DEFINER RPC per action enforce the reser
 10. Create `reservations`: `id`, `locker_id FK`, `user_id FK`, `request_id FK`, `expires_at timestamptz`. Add plain unique indexes on `locker_id` and on `user_id`.
 11. Create `leases`: `id`, `locker_id FK`, `user_id FK`, `request_id FK`, `start_date date`, `end_date date`, `comments text`, `ended_at timestamptz null`. Add partial unique indexes that limit each locker and each user to one lease where `ended_at is null`.
 12. Postgres rejects `now()` inside index predicates, so the unique indexes in step 10 cover all reservation rows and each RPC deletes expired reservations before it inserts (step 14).
-13. Create view `locker_wall`: one row per locker with a derived `state` column (`inactive`, `available`, `reserved`, `occupied`) and, on occupied rows, `name`, `id_number`, and user `comments` joined from `profiles` plus `start_date`, `end_date`, and lease `comments` from `leases`. Both UIs render this view and nothing else.
+13. Create view `locker_wall`: one row per locker with a derived `state` column (`inactive`, `available`, `reserved`, `occupied`) and, on occupied rows, the occupant's `name` from `profiles` plus `start_date` and `end_date` from `leases`. Every signed-in user reads this view, so it carries no ID number, no personal comment, and no lease comment. The admin surfaces read those from `profiles` and `leases` directly. The user wall renders this view and nothing else.
 
 ## Phase 2: concurrency RPCs (SECURITY DEFINER, all checks server-side)
 
@@ -76,7 +76,7 @@ Checkpoint rule: each checkpoint delivers the surface running on real data at a 
 30. Read the skill's reference files before writing component CSS: `references/app-screens.md` (this project is a product surface), `references/cards.md`, `references/tables.md`, `references/motion.md`, and `references/flow-audit.md` (it defines the squint and grayscale tests used in step 45).
 31. Build the app shell: page on `--paper`, top nav in Aeonik Medium 14px, 1200px content column, and typography utility classes for each role in the skill's role table.
 32. Build the wall and cell GUI on real seeded data (create lockers in the editor, reserve one as a test user, lease one via admin direct assignment; the Forbidden list bans fabricated seed personas). Cell states: available renders white with a `--line` hairline; reserved renders `--signature-soft` with a `--signature` outline on the viewer's own; occupied renders `--steel-1` fill with `--ink` text; inactive renders `--paper` with no border.
-33. **Checkpoint: wall GUI.** Review dimensions: what a cell shows at rest (label plus state word against label only); where occupied detail renders (name, ID number, comments, lease dates, and lease comments on the cell against in a click-opened detail); cell size and grid gap at the real locker count; overflow at 390px (horizontal scroll against scaled cells); whether a state legend appears and where.
+33. **Checkpoint: wall GUI.** Review dimensions: what a cell shows at rest (label plus state word against label only); what the click-opened detail popup carries beyond the occupant's name and the lease dates, given the cell itself shows the name; cell size and grid gap at the real locker count; overflow at 390px (horizontal scroll against scaled cells); whether a state legend appears and where.
 34. Build the reservation interaction: click on an available cell, the 15-minute countdown, Select, and Cancel.
 35. **Checkpoint: reservation GUI.** Review dimensions: countdown placement (on the cell, in the status panel, or both); click behavior (a click reserves immediately against a click opening a confirm step); Cancel prominence relative to Select; what the screen shows at the moment a reservation expires.
 36. Build the status panel with its five states from step 22.
@@ -95,6 +95,6 @@ Checkpoint rule: each checkpoint delivers the surface running on real data at a 
 46. Open two browsers. User A reserves a locker; user B's wall must grey that cell within one second and B's click on it must return "already reserved".
 47. Two approved users click the same cell at the same moment from two tabs. Exactly one reservation row may exist afterward.
 48. Let a reservation expire. The cell must return to available on both screens without a refresh, and the same user must succeed at a second reservation.
-49. Run the full path: signup, request, admin approval, email receipt, reservation, selection, occupied cell with joined name and ID, admin date edit, admin reassign, freed cell.
+49. Run the full path: signup, request, admin approval, email receipt, reservation, selection, occupied cell showing the joined name, admin date edit, admin reassign, freed cell. As a second signed-in user, confirm the occupied cell and its detail popup show no ID number and no comment field.
 50. As a user, attempt a direct insert into `leases` and a direct update on `lockers` through the JS client. RLS must reject both attempts.
 50. As a user, attempt a direct insert into `leases` and a direct update on `lockers` through the JS client. RLS must reject both attempts.
