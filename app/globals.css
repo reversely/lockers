@@ -332,6 +332,37 @@ textarea.input {
   line-height: 1;
 }
 
+/* Working table, metrics from the tables reference: 44px rows, 13px Medium headers in ink-3
+   sentence case, hairline row separators, the title column in Medium ink. */
+.worktable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.worktable th {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.worktable td {
+  height: 44px;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.worktable tbody tr:hover {
+  background: var(--paper);
+}
+.worktable-title {
+  font-weight: 500;
+  color: var(--ink);
+}
+
 .scrim {
   position: fixed;
   inset: 0;

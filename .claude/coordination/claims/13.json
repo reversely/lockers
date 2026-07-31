@@ -1,0 +1,14 @@
+{
+  "issue": 13,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/13.json",
+    "app/admin/layout.tsx",
+    "app/admin/requests/actions.ts",
+    "app/admin/requests/page.tsx",
+    "app/globals.css",
+    "lib/resend.ts"
+  ],
+  "opened": "2026-07-31T17:13:06.380Z",
+  "closed": "2026-07-31T17:17:55.602Z"
+}
