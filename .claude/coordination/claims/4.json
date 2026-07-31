@@ -1,0 +1,15 @@
+{
+  "issue": 4,
+  "agent": "lockers",
+  "files": [
+    "supabase/migrations/20260731120000_profiles.sql",
+    "supabase/migrations/20260731120100_settings.sql",
+    "supabase/migrations/20260731120200_lockers.sql",
+    "supabase/migrations/20260731120300_requests.sql",
+    "supabase/migrations/20260731120400_reservations.sql",
+    "supabase/migrations/20260731120500_leases.sql",
+    "supabase/migrations/20260731120600_locker_wall.sql"
+  ],
+  "opened": "2026-07-31T15:58:32.937Z",
+  "closed": "2026-07-31T15:58:32.943Z"
+}
