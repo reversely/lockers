@@ -28,9 +28,9 @@ export function StatusPanel({
     <section className="surface" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {state.kind === "none" ? (
         <>
-          <span className="eyebrow">Your locker</span>
+          <span className="eyebrow">No locker yet</span>
           <p style={{ fontSize: 14 }}>
-            Submit a request, then pay by e-transfer. An admin approves the request once the
+            Submit a request, then pay by e-transfer. The admin approves the request once the
             payment arrives.
           </p>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -62,7 +62,7 @@ export function StatusPanel({
 
       {state.kind === "approved" ? (
         <>
-          <span className="eyebrow">Approved</span>
+          <span className="eyebrow">Request approved</span>
           <p style={{ fontSize: 15, color: "var(--ink)" }}>
             Pick your locker. A click holds it while you confirm.
           </p>
@@ -71,11 +71,11 @@ export function StatusPanel({
 
       {state.kind === "reserving" ? (
         <>
-          <span className="eyebrow">Locker {state.row.label} held</span>
+          <span className="eyebrow">Holding locker {state.row.label}</span>
           <div className="countdown">{state.countdown}</div>
           <div style={{ display: "flex", gap: 12 }}>
             <button className="btn btn-ink" disabled={busy} onClick={onSelect}>
-              Select
+              Confirm locker
             </button>
             <button className="btn btn-line" disabled={busy} onClick={onCancel}>
               Cancel

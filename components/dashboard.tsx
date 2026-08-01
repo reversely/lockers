@@ -129,7 +129,7 @@ export function Dashboard({
         onCancel={onCancel}
       />
       <section className="surface" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <h2 className="surface-title">The wall</h2>
+        <h2 className="surface-title">Locker wall</h2>
         <Wall
           wall={wall}
           userId={userId}

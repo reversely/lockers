@@ -50,7 +50,7 @@ export default async function UsersPage({
       <div>
         <span className="eyebrow">Users</span>
         <h2 className="surface-title" style={{ marginTop: 8 }}>
-          Every account
+          All users
         </h2>
       </div>
       {error ? <p className="error-line">{error}</p> : null}
@@ -98,7 +98,7 @@ export default async function UsersPage({
       ) : null}
 
       {profiles.length === 0 ? (
-        <p style={{ fontSize: 14 }}>No accounts exist yet.</p>
+        <p style={{ fontSize: 14 }}>No users yet.</p>
       ) : (
         <div className="wall-scroll">
           <table className="worktable">

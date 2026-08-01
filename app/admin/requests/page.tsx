@@ -48,7 +48,7 @@ export default async function RequestsPage({
         <div
           style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}
         >
-          <p className="error-line">Approved, and the email did not send: {sendfail}.</p>
+          <p className="error-line">Approved. The email did not send. {sendfail}</p>
           <form action={retrySend}>
             <input type="hidden" name="request_id" value={approved} />
             <button className="btn btn-line" type="submit">

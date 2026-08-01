@@ -37,7 +37,7 @@ export function Wall({
   const [openCell, setOpenCell] = useState<WallRow | null>(null);
 
   if (wall.length === 0) {
-    return <p style={{ fontSize: 14 }}>No lockers exist yet. An admin creates the wall.</p>;
+    return <p style={{ fontSize: 14 }}>No lockers yet. The admin creates them.</p>;
   }
 
   const maxCol = Math.max(...wall.map((r) => r.col));

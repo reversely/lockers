@@ -21,7 +21,7 @@ export default async function SettingsPage({
       <div>
         <span className="eyebrow">Settings</span>
         <h2 className="surface-title" style={{ marginTop: 8 }}>
-          Requests and leases
+          Requests, leases, and the approval email
         </h2>
       </div>
       {saved ? <p className="notice-line">Saved.</p> : null}

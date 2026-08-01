@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { logIn } from "@/app/auth/actions";
 
-export const metadata: Metadata = { title: "Log in" };
+export const metadata: Metadata = { title: "Sign in" };
 
 export default async function LoginPage({
   searchParams,
@@ -17,7 +17,7 @@ export default async function LoginPage({
         <div>
           <span className="eyebrow">Lockers</span>
           <h2 className="surface-title" style={{ marginTop: 8 }}>
-            Log in
+            Sign in
           </h2>
         </div>
         {notice ? <p className="notice-line">{notice}</p> : null}
@@ -43,11 +43,11 @@ export default async function LoginPage({
             />
           </div>
           <button className="btn btn-ink" type="submit">
-            Log in
+            Sign in
           </button>
         </form>
         <p style={{ fontSize: 14 }}>
-          New here? <Link href="/signup">Sign up</Link>
+          Don&apos;t have an account? <Link href="/signup">Sign up</Link>
         </p>
       </div>
     </main>

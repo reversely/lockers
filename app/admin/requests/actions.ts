@@ -12,7 +12,7 @@ async function sendApprovalEmail(
     supabase.from("profiles").select("email").eq("id", userId).single(),
     supabase.from("admin_settings").select("approval_email_subject,approval_email_body").single(),
   ]);
-  if (!profile?.email) return { sent: false, reason: "the requester has no email on file" };
+  if (!profile?.email) return { sent: false, reason: "The requester has no email on file." };
   return sendEmail({
     to: profile.email,
     subject: settings?.approval_email_subject || "Your locker request is approved",
@@ -38,7 +38,7 @@ export async function approveRequest(formData: FormData) {
     .select("user_id")
     .single();
   if (error || !request) {
-    redirect(`/admin/requests?error=${encodeURIComponent(error?.message ?? "request not found or not pending")}`);
+    redirect(`/admin/requests?error=${encodeURIComponent(error?.message ?? "That request is not pending anymore.")}`);
   }
 
   const result = await sendApprovalEmail(supabase, request.user_id);
@@ -60,7 +60,7 @@ export async function retrySend(formData: FormData) {
     .eq("id", requestId)
     .single();
   if (!request || request.status !== "approved") {
-    redirect(`/admin/requests?error=${encodeURIComponent("that request is not approved")}`);
+    redirect(`/admin/requests?error=${encodeURIComponent("That request is not approved.")}`);
   }
 
   const result = await sendApprovalEmail(supabase, request.user_id);

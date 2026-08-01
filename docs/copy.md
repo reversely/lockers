@@ -14,15 +14,15 @@ Everything else is fixed app copy, editable in the source files this document ci
 
 ## The user's flow
 
-### 1. Log in (`app/login/page.tsx`)
+### 1. Sign in (`app/login/page.tsx`)
 
 | Element | Copy |
 |---|---|
 | Eyebrow | "Lockers" |
-| Heading | "Log in" |
+| Heading | "Sign in" |
 | Field labels | "Email", "Password" |
-| Submit button | "Log in" |
-| Footer link | "New here? Sign up" |
+| Submit button | "Sign in" |
+| Footer link | "Don't have an account? Sign up" |
 | Notice after signup | "Check your email for a confirmation link." |
 | Notice after a dead link | "The confirmation link is invalid or has expired." |
 | Failed sign-in | Supabase, for example "Invalid login credentials" |
@@ -34,8 +34,9 @@ Everything else is fixed app copy, editable in the source files this document ci
 | Eyebrow | "Lockers" |
 | Heading | "Sign up" |
 | Field labels | "Email", "Password" |
+| Field helper | "At least 6 characters." |
 | Submit button | "Sign up" |
-| Footer link | "Have an account? Log in" |
+| Footer link | "Already have an account? Sign in" |
 | Failed signup | Supabase, for example a weak-password message |
 
 ### 3. The confirmation email (Supabase stock template)
@@ -73,8 +74,8 @@ No request yet:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Your locker" |
-| Body | "Submit a request, then pay by e-transfer. An admin approves the request once the payment arrives." |
+| Eyebrow | "No locker yet" |
+| Body | "Submit a request, then pay by e-transfer. The admin approves the request once the payment arrives." |
 | Button | "Request a locker" |
 | Beside a disabled button | "Complete your profile first." ("profile" links to the profile page) |
 
@@ -91,16 +92,16 @@ Request approved:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Approved" |
+| Eyebrow | "Request approved" |
 | Body | "Pick your locker. A click holds it while you confirm." |
 
 Holding a locker:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Locker {label} held" |
+| Eyebrow | "Holding locker {label}" |
 | Countdown | `{mm:ss}`, "--:--" before the first tick |
-| Buttons | "Select", "Cancel" |
+| Buttons | "Confirm locker", "Cancel" |
 
 Lease in place:
 
@@ -110,12 +111,12 @@ Lease in place:
 | Heading | `{label}` |
 | Dates | "{Jul 31, 2026} to {Nov 28, 2026}" |
 
-### 7. The wall (`components/wall.tsx`)
+### 7. Locker wall (`components/wall.tsx`)
 
 | Element | Copy |
 |---|---|
-| Surface heading | "The wall" |
-| Empty state | "No lockers exist yet. An admin creates the wall." |
+| Surface heading | "Locker wall" |
+| Empty state | "No lockers yet. The admin creates them." |
 | Occupied cell | `{label}` over `{occupant name}` |
 | Own held cell | `{label}` over the countdown |
 | Other cells | `{label}` |
@@ -160,15 +161,15 @@ Each renders in the panel's error line exactly as raised:
 | Row button | "Approve" |
 | Empty state | "No pending requests." |
 | After a sent approval | "Approved. The email went out." |
-| After a failed send | "Approved, and the email did not send: {reason}." |
+| After a failed send | "Approved. The email did not send. {reason}" |
 | Retry button | "Retry send" |
 
 The `{reason}` values (`app/admin/requests/actions.ts`, `lib/resend.ts`):
 
-- "RESEND_API_KEY or RESEND_FROM_EMAIL is not set"
-- "the requester has no email on file"
-- "that request is not approved" (a retry on a request that is not approved)
-- "request not found or not pending" (an approve that lost a race)
+- "Email sending is not configured: RESEND_API_KEY or RESEND_FROM_EMAIL is missing."
+- "The requester has no email on file."
+- "That request is not approved." (a retry on a request that is not approved)
+- "That request is not pending anymore." (an approve that lost a race)
 - A Resend API error message, passed through.
 
 ### 3. The approval email (`app/admin/requests/actions.ts`)
@@ -182,9 +183,9 @@ The `{reason}` values (`app/admin/requests/actions.ts`, `lib/resend.ts`):
 
 | Element | Copy |
 |---|---|
-| Surface heading | "The wall" |
+| Surface heading | "Locker wall" |
 | Mode toggle | "Edit layout", then "Done" |
-| Empty state | "No lockers exist yet." then "Edit layout creates them." or, in edit mode, "Add a row to create the first cell." |
+| Empty state | "No lockers yet." then "Edit layout to create them." or, in edit mode, "Add a row to create the first cell." |
 | Cells | as the user wall, plus a countdown on any held cell |
 
 Side panel on an available cell:
@@ -238,10 +239,10 @@ Errors the panel can show, beyond the shared list above:
 | Element | Copy |
 |---|---|
 | Eyebrow | "Users" |
-| Heading | "Every account" |
+| Heading | "All users" |
 | Table headers | "Name", "ID number", "Email", "Phone", "Preferred contact", "Comments", "Locker" |
 | Missing name | "no name yet" |
-| Empty state | "No accounts exist yet." |
+| Empty state | "No users yet." |
 
 Edit form, opened by a row click:
 
@@ -258,18 +259,18 @@ Edit form, opened by a row click:
 | Element | Copy |
 |---|---|
 | Eyebrow | "Settings" |
-| Heading | "Requests and leases" |
+| Heading | "Requests, leases, and the approval email" |
 | Field labels | "E-transfer instructions, shown to a user with a pending request", "Reservation minutes", "Default lease days", "Approval email subject", "Approval email body" |
 | Button | "Save" |
 | After save | "Saved." |
-| Validation | "reservation minutes needs a positive whole number", "default lease days needs a positive whole number" |
+| Validation | "Reservation minutes needs a positive whole number.", "Default lease days needs a positive whole number." |
 
 ## Browser tab titles
 
 | Page | Title |
 |---|---|
 | Root layout | "Lockers", description "Request, reserve, and manage lockers." |
-| Log in | "Log in" |
+| Sign in | "Sign in" |
 | Sign up | "Sign up" |
 | Profile | "Profile" |
 | Admin pages | "Requests", "Wall", "Users", "Settings" |

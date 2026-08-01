@@ -265,7 +265,7 @@ textarea.input {
   gap: 16px;
 }
 
-/* The wall. Cell states from plan step 32: available white with a hairline, reserved
+/* The locker wall. Cell states from plan step 32: available white with a hairline, reserved
    signature-soft with a signature outline on the viewer's own, occupied steel with ink text,
    inactive paper with no border. */
 

@@ -16,7 +16,7 @@ export async function sendEmail({
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
   if (!apiKey || !from) {
-    return { sent: false, reason: "RESEND_API_KEY or RESEND_FROM_EMAIL is not set" };
+    return { sent: false, reason: "Email sending is not configured: RESEND_API_KEY or RESEND_FROM_EMAIL is missing." };
   }
 
   const resend = new Resend(apiKey);

@@ -1,0 +1,23 @@
+{
+  "issue": 22,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/22.json",
+    "app/admin/requests/actions.ts",
+    "app/admin/requests/page.tsx",
+    "app/admin/settings/actions.ts",
+    "app/admin/settings/page.tsx",
+    "app/admin/users/page.tsx",
+    "app/globals.css",
+    "app/login/page.tsx",
+    "app/signup/page.tsx",
+    "components/admin-wall.tsx",
+    "components/dashboard.tsx",
+    "components/status-panel.tsx",
+    "components/wall.tsx",
+    "docs/copy.md",
+    "lib/resend.ts"
+  ],
+  "opened": "2026-08-01T13:07:42.693Z",
+  "closed": "2026-08-01T13:12:54.293Z"
+}

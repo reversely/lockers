@@ -7,10 +7,10 @@ export async function updateSettings(formData: FormData) {
   const reservationMinutes = Number(formData.get("reservation_minutes"));
   const defaultLeaseDays = Number(formData.get("default_lease_days"));
   if (!Number.isInteger(reservationMinutes) || reservationMinutes <= 0) {
-    redirect(`/admin/settings?error=${encodeURIComponent("reservation minutes needs a positive whole number")}`);
+    redirect(`/admin/settings?error=${encodeURIComponent("Reservation minutes needs a positive whole number.")}`);
   }
   if (!Number.isInteger(defaultLeaseDays) || defaultLeaseDays <= 0) {
-    redirect(`/admin/settings?error=${encodeURIComponent("default lease days needs a positive whole number")}`);
+    redirect(`/admin/settings?error=${encodeURIComponent("Default lease days needs a positive whole number.")}`);
   }
 
   const supabase = await createClient();

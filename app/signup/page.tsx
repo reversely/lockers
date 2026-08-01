@@ -41,13 +41,14 @@ export default async function SignupPage({
               minLength={6}
               required
             />
+            <span className="notice-line">At least 6 characters.</span>
           </div>
           <button className="btn btn-ink" type="submit">
             Sign up
           </button>
         </form>
         <p style={{ fontSize: 14 }}>
-          Have an account? <Link href="/login">Log in</Link>
+          Already have an account? <Link href="/login">Sign in</Link>
         </p>
       </div>
     </main>

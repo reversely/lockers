@@ -103,7 +103,7 @@ export function AdminWall({
   return (
     <section className="surface" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-        <h2 className="surface-title">The wall</h2>
+        <h2 className="surface-title">Locker wall</h2>
         <button className={editing ? "btn btn-ink" : "btn btn-line"} onClick={() => setEditing((e) => !e)}>
           {editing ? "Done" : "Edit layout"}
         </button>
@@ -128,8 +128,8 @@ export function AdminWall({
       {error ? <p className="error-line">{error}</p> : null}
       {data.lockers.length === 0 ? (
         <p style={{ fontSize: 14 }}>
-          No lockers exist yet.{" "}
-          {editing ? "Add a row to create the first cell." : "Edit layout creates them."}
+          No lockers yet.{" "}
+          {editing ? "Add a row to create the first cell." : "Edit layout to create them."}
         </p>
       ) : (
         <div className="wall-scroll">
