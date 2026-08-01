@@ -1,0 +1,11 @@
+{
+  "issue": 20,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/20.json",
+    "app/globals.css",
+    "scripts/verify-mobile.mjs"
+  ],
+  "opened": "2026-08-01T12:36:35.197Z",
+  "closed": "2026-08-01T12:43:58.311Z"
+}

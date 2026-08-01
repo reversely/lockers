@@ -325,6 +325,7 @@ textarea.input {
 }
 .cell-rename {
   width: 90%;
+  min-height: 32px;
   border: none;
   border-bottom: 1px solid var(--signature);
   background: transparent;
