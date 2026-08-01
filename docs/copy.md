@@ -129,18 +129,22 @@ Occupied-cell popup:
 | Body | `{occupant name}`, then "{start date} to {end date}" |
 | Button | "Close" |
 
-### 8. Errors the panel can show (`supabase/migrations`, raised by the RPCs)
+### 8. Errors the panel can show (`lib/errors.ts` over the RPC strings)
 
-Each renders in the panel's error line exactly as raised:
+The RPCs raise short fact strings, which stay as raised because tests and callers assert them.
+`lib/errors.ts` maps each to the sentence the panel renders; an unmapped message passes through
+raw.
 
-- "already reserved"
-- "no approved request"
-- "already holds a locker"
-- "already holding a reservation"
-- "locker unavailable"
-- "already leased"
-- "reservation expired"
-- "not signed in"
+| Raised | Rendered |
+|---|---|
+| "already reserved" | "Someone already holds that locker." |
+| "no approved request" | "Your request is not approved yet." |
+| "already holds a locker" | "You already have a locker." |
+| "already holding a reservation" | "You already hold a locker. Cancel it first." |
+| "locker unavailable" | "That locker is not available." |
+| "already leased" | "That locker is occupied." |
+| "reservation expired" | "Your hold expired. Pick another locker." |
+| "not signed in" | "Your session ended. Sign in again." |
 
 ## The admin's flow
 
@@ -220,11 +224,13 @@ Side panel on a held cell:
 | Countdown | `{mm:ss}` |
 | Buttons | "Force release", "Close" |
 
-Errors the panel can show, beyond the shared list above:
+Errors the panel can show, beyond the shared table above, rendered through the same lookup:
 
-- "admin only"
-- "no active lease with that id"
-- "locker is reserved" (a reassign into a live hold)
+| Raised | Rendered |
+|---|---|
+| "admin only" | "Only an admin can do that." |
+| "no active lease with that id" | "That lease is not active anymore." |
+| "locker is reserved" (a reassign into a live hold) | "A user is holding that locker. Release the hold first." |
 
 ### 5. Edit layout mode (`components/admin-wall.tsx`)
 

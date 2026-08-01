@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { friendlyError } from "@/lib/errors";
 import { fetchOpenRequest, fetchWall, type OpenRequest, type WallRow } from "@/lib/wall";
 import { Wall } from "@/components/wall";
 import { StatusPanel, type PanelState } from "@/components/status-panel";
@@ -94,7 +95,7 @@ export function Dashboard({
       setBusy(true);
       setError(null);
       const { error: actionError } = await run();
-      if (actionError) setError(actionError.message);
+      if (actionError) setError(friendlyError(actionError.message));
       await refetch();
       setBusy(false);
     },

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { friendlyError } from "@/lib/errors";
 import {
   fetchAdminWall,
   insertInactiveLockers,
@@ -61,7 +62,7 @@ export function AdminWall({
       setBusy(true);
       setError(null);
       const { error: actionError } = await run();
-      if (actionError) setError(actionError.message);
+      if (actionError) setError(friendlyError(actionError.message));
       await refetch();
       setBusy(false);
       return !actionError;
