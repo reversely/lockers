@@ -137,15 +137,31 @@
   gap: 16px;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
+}
+/* The signed-in email is secondary identity, not navigation; under 640px it would wrap
+   mid-word before Profile and Sign out fit. */
+@media (max-width: 639px) {
+  .topbar-email {
+    display: none;
+  }
 }
 
 .app-main {
+  /* width must be definite: the auto inline margins disable flex stretch inside the body
+     column, and a fit-content main floors at its content's minimum width, so a wide grid
+     would push the page past the viewport instead of scrolling inside .wall-scroll.
+     overflow: auto never changes an element's intrinsic width. */
+  width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+.app-main > * {
+  min-width: 0;
 }
 
 .surface {

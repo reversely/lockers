@@ -10,7 +10,9 @@ export function TopBar({ email }: { email: string | null }) {
         </Link>
         <nav className="topbar-nav">
           <Link href="/profile">Profile</Link>
-          <span style={{ color: "var(--ink-3)", fontWeight: 400 }}>{email}</span>
+          <span className="topbar-email" style={{ color: "var(--ink-3)", fontWeight: 400 }}>
+            {email}
+          </span>
           <form action={signOut}>
             <button className="btn btn-line" type="submit">
               Sign out
