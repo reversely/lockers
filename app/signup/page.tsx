@@ -41,7 +41,7 @@ export default async function SignupPage({
               minLength={6}
               required
             />
-            <span className="notice-line">At least 6 characters.</span>
+            <span className="notice-line">Your password must be at least 6 characters.</span>
           </div>
           <button className="btn btn-ink" type="submit">
             Sign up

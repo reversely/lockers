@@ -34,7 +34,7 @@ Everything else is fixed app copy, editable in the source files this document ci
 | Eyebrow | "Lockers" |
 | Heading | "Sign up" |
 | Field labels | "Email", "Password" |
-| Field helper | "At least 6 characters." |
+| Field helper | "Your password must be at least 6 characters." |
 | Submit button | "Sign up" |
 | Footer link | "Already have an account? Sign in" |
 | Failed signup | Supabase, for example a weak-password message |
@@ -44,7 +44,7 @@ Everything else is fixed app copy, editable in the source files this document ci
 | Element | Copy |
 |---|---|
 | Subject | "Confirm your email address" |
-| Body | "Confirm your email address" / "Follow the link below to confirm this email address and finish signing up." |
+| Body | "Confirm your email address" / "Follow the link below to confirm this email address and finish signing up." (Supabase stock wording; the free tier refuses template edits, so "finish signup" is not reachable) |
 | Link text | "Confirm email address" |
 
 ### 4. Top bar, on every signed-in page (`components/top-bar.tsx`)
@@ -70,44 +70,40 @@ The email hides under 640px.
 
 ### 6. Dashboard, one panel state at a time (`components/status-panel.tsx`)
 
-No request yet:
+No request yet, two elements only:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "No locker yet" |
-| Body | "Submit a request, then pay by e-transfer. The admin approves the request once the payment arrives." |
+| Body | "Submit a request, then pay by e-transfer." |
+| Body, profile incomplete | "Complete your profile first." ("profile" links to the profile page; the button stays disabled until the profile has the fields a request needs) |
 | Button | "Request a locker" |
-| Beside a disabled button | "Complete your profile first." ("profile" links to the profile page) |
 
 Request pending:
 
 | Element | Copy |
 |---|---|
 | Eyebrow | "Request pending" |
-| Body | admin-authored e-transfer instructions |
-| Body when blank | "The admin has not written payment instructions yet." |
-| Status line | "Awaiting confirmation from the admin." |
+| Body | admin-authored e-transfer instructions, written in the settings field "E-transfer instructions, shown to a user with a pending request" |
+| Body when blank | "Please contact your admin for assistance with signup." |
+| Status line | "Awaiting confirmation from admin. Please allow 3-5 working days." |
 
 Request approved:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Request approved" |
-| Body | "Pick your locker. A click holds it while you confirm." |
+| Body | "Please select an available locker." |
 
 Holding a locker:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Holding locker {label}" |
-| Countdown | `{mm:ss}`, "--:--" before the first tick |
+| Countdown line | "Holding locker for {mm:ss}", "--:--" before the first tick |
 | Buttons | "Confirm locker", "Cancel" |
 
 Lease in place:
 
 | Element | Copy |
 |---|---|
-| Eyebrow | "Your locker" |
 | Heading | `{label}` |
 | Dates | "{Jul 31, 2026} to {Nov 28, 2026}" |
 

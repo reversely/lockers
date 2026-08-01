@@ -1,0 +1,12 @@
+{
+  "issue": 24,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/24.json",
+    "app/signup/page.tsx",
+    "components/status-panel.tsx",
+    "docs/copy.md"
+  ],
+  "opened": "2026-08-01T23:57:08.335Z",
+  "closed": "2026-08-01T23:57:08.342Z"
+}

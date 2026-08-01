@@ -28,20 +28,17 @@ export function StatusPanel({
     <section className="surface" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {state.kind === "none" ? (
         <>
-          <span className="eyebrow">No locker yet</span>
-          <p style={{ fontSize: 14 }}>
-            Submit a request, then pay by e-transfer. The admin approves the request once the
-            payment arrives.
-          </p>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {state.profileComplete ? (
+            <p style={{ fontSize: 15, color: "var(--ink)" }}>Submit a request, then pay by e-transfer.</p>
+          ) : (
+            <p style={{ fontSize: 15, color: "var(--ink)" }}>
+              Complete your <a href="/profile">profile</a> first.
+            </p>
+          )}
+          <div>
             <button className="btn btn-ink" disabled={!state.profileComplete || busy} onClick={onRequest}>
               Request a locker
             </button>
-            {!state.profileComplete ? (
-              <span className="notice-line">
-                Complete your <a href="/profile">profile</a> first.
-              </span>
-            ) : null}
           </div>
         </>
       ) : null}
@@ -54,25 +51,22 @@ export function StatusPanel({
               {state.instructions}
             </p>
           ) : (
-            <p style={{ fontSize: 14 }}>The admin has not written payment instructions yet.</p>
+            <p style={{ fontSize: 14 }}>Please contact your admin for assistance with signup.</p>
           )}
-          <p className="notice-line">Awaiting confirmation from the admin.</p>
+          <p className="notice-line">Awaiting confirmation from admin. Please allow 3-5 working days.</p>
         </>
       ) : null}
 
       {state.kind === "approved" ? (
-        <>
-          <span className="eyebrow">Request approved</span>
-          <p style={{ fontSize: 15, color: "var(--ink)" }}>
-            Pick your locker. A click holds it while you confirm.
-          </p>
-        </>
+        <p style={{ fontSize: 15, color: "var(--ink)" }}>Please select an available locker.</p>
       ) : null}
 
       {state.kind === "reserving" ? (
         <>
-          <span className="eyebrow">Holding locker {state.row.label}</span>
-          <div className="countdown">{state.countdown}</div>
+          <p style={{ fontSize: 15, color: "var(--ink)" }}>
+            Holding locker for{" "}
+            <span style={{ fontVariantNumeric: "tabular-nums" }}>{state.countdown}</span>
+          </p>
           <div style={{ display: "flex", gap: 12 }}>
             <button className="btn btn-ink" disabled={busy} onClick={onSelect}>
               Confirm locker
@@ -86,7 +80,6 @@ export function StatusPanel({
 
       {state.kind === "fulfilled" ? (
         <>
-          <span className="eyebrow">Your locker</span>
           <p style={{ fontSize: 24, fontWeight: 500, color: "var(--ink)", lineHeight: 1.2 }}>
             {state.row.label}
           </p>
