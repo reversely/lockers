@@ -18,9 +18,11 @@ export async function sendEmail({
   if (!apiKey || !from) {
     return { sent: false, reason: "Email sending is not configured: RESEND_API_KEY or RESEND_FROM_EMAIL is missing." };
   }
+  // Optional: without it, replies go to the from address, whose domain may not receive mail.
+  const replyTo = process.env.RESEND_REPLY_TO_EMAIL || undefined;
 
   const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({ from, to, subject, text: body });
+  const { error } = await resend.emails.send({ from, to, subject, text: body, replyTo });
   if (error) return { sent: false, reason: error.message };
   return { sent: true };
 }

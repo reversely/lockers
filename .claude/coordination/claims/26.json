@@ -1,0 +1,11 @@
+{
+  "issue": 26,
+  "agent": "lockers",
+  "files": [
+    ".claude/coordination/claims/26.json",
+    ".env.example",
+    "lib/resend.ts"
+  ],
+  "opened": "2026-08-08T03:59:07.920Z",
+  "closed": "2026-08-08T03:59:08.493Z"
+}
